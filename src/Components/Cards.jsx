@@ -3,7 +3,7 @@ import Card from './Card'
 import axios, { all } from 'axios'
 import { NavLink } from 'react-router-dom'
 
-function Cards() {
+function Cards({variant}) {
   const [ allEvents, setAllEvents ] = useState(null)
 
   const getAllEvents = async() => {
@@ -14,13 +14,13 @@ function Cards() {
       console.log(erro)
     }
   }
-
+  
   useEffect(() => {
     getAllEvents()
   }, [])
 
   return (
-    <div className='cards-container'>
+    <div className={variant === "list" ? 'cards-list-container' : 'cards-container' }>
       {allEvents?.map((event) => {
         return (<NavLink key={event._id} className="cards-container-card" to={`/events/${event._id}`}>
                     <Card title={event.title} format={event.format}/>

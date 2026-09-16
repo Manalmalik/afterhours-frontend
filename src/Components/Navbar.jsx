@@ -41,7 +41,7 @@ const Navbar = () => {
           <img className="logo" src="src/assets/images/logo.png"/>
         </NavLink>
       <div className="navbar-links">
-        <NavLink to="/"> Events </NavLink>
+        <NavLink to="/events"> Events </NavLink>
         <NavLink to="/"> Side Quest </NavLink>
         <NavLink to="/"> About </NavLink>
         <NavLink to="/"> Idea </NavLink>
