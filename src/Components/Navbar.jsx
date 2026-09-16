@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
 
 const Navbar = () => {
-  const { setIsLoggedIn, setLoggedUserId, setUserRole, isLoggedIn } = useContext(AuthContext)
+  const { setIsLoggedIn, setLoggedUserId, setUserRole, isLoggedIn, userRole } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const handleSignUpClick = () => {
@@ -27,6 +27,14 @@ const Navbar = () => {
     navigate("/login")
   }
 
+  const getNavLink = () => {
+    if(userRole === "admin") {
+      return "/dashboard"
+    } else {
+      return "/account"
+    }
+  }
+
   return (
     <div className="navbar-container">
         <NavLink to="/"> 
@@ -45,7 +53,12 @@ const Navbar = () => {
             <button className="btn-primary" onClick={handleSignUpClick}> Sign Up </button> 
           </>
          :
+          <>
+          <NavLink className="user-icon" to={getNavLink()}>
+           <i className="fa-solid fa-circle-user"></i>
+          </NavLink>
           <button className="btn-primary" onClick={handleLogOutClick}> Log out </button>
+          </>
         }
       </div>
     </div>

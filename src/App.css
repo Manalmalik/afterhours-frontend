@@ -240,6 +240,15 @@ hr.primary {
   justify-content: center;
 }
 
+.user-icon > svg {
+  color: var(--color-primary);
+  font-size: var(--space-md);
+}
+
+.user-icon > svg:hover {
+   color: var(--color-primary-light);
+}
+
 /* AUTH FORM */
 .auth-form > form {
   display: flex;
