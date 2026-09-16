@@ -1,9 +1,37 @@
-import { NavLink } from "react-router-dom"
+import { useContext } from "react"
+import { NavLink, useNavigate } from "react-router-dom"
+import { AuthContext } from "../context/auth.context"
 
 const Navbar = () => {
+  const { setIsLoggedIn, setLoggedUserId, setUserRole, isLoggedIn } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const handleSignUpClick = () => {
+    navigate("/signup")
+  }
+
+  const handleLogInClick = () => {
+    navigate("/login")
+  }
+
+  const handleLogOutClick = () => {
+    // remove token from local storage
+    localStorage.removeItem("authToken")
+
+    // revert the context states
+    setIsLoggedIn(false)
+    setLoggedUserId(null)
+    setUserRole(null)
+    
+    // navigate the user to a public page
+    navigate("/login")
+  }
+
   return (
     <div className="navbar-container">
-      <img src="src/assets/images/logo.png"/>
+        <NavLink to="/"> 
+          <img className="logo" src="src/assets/images/logo.png"/>
+        </NavLink>
       <div className="navbar-links">
         <NavLink to="/"> Events </NavLink>
         <NavLink to="/"> Side Quest </NavLink>
@@ -11,8 +39,14 @@ const Navbar = () => {
         <NavLink to="/"> Idea </NavLink>
       </div>
       <div className="navbar-buttons">
-        <button className="btn-primary"> Sign In </button>
-        <button className="btn-primary"> Admin </button>
+        {!isLoggedIn ? 
+          <>
+            <button className="btn-primary" onClick={handleLogInClick}> Log In </button>
+            <button className="btn-primary" onClick={handleSignUpClick}> Sign Up </button> 
+          </>
+         :
+          <button className="btn-primary" onClick={handleLogOutClick}> Log out </button>
+        }
       </div>
     </div>
   )

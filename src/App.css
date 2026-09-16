@@ -42,7 +42,7 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3 {
+h1, h2, h3, input {
   font-family: var(--font-heading);
 }
 
@@ -67,6 +67,23 @@ h1, h2, h3 {
   color: var(--color-secondary);
 }
 
+.btn-secondary {
+  border: 1px solid var(--color-primary);
+  background-color: var(--color-primary);
+  padding: var(--space-xs) var(--space-sm);
+  font-family: var(--font-text);
+  font-size: var(--font-xs);
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+
+
 /* LINKS */
 a {
   text-decoration: none;
@@ -85,6 +102,9 @@ a:active , a:hover {
 /* LAYOUT */
 .page-container {
   padding-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .page-header {
@@ -167,7 +187,7 @@ hr.primary {
   border-bottom: 1px solid var(--color-muted);
 }
 
-.navbar-container > img {
+.navbar-container .logo {
   width: 4rem;
 }
 
@@ -185,4 +205,37 @@ hr.primary {
   gap: var(--space-xs);
   align-items: center;
   justify-content: center;
+}
+
+/* AUTH FORM */
+.auth-form > form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.form-field {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.auth-form > form > button {
+  margin: var(--space-sm);
+}
+
+/* Card */
+
+.cards-container {
+   display: flex;
+   justify-content: space-between;
+   gap: var(--space-md);
+}
+
+.card-container {
+  padding: var(--space-sm);
+  width: 15rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 4px;
+  box-shadow: 4px 4px var(--color-primary);
 }

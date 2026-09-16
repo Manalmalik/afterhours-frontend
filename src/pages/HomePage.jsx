@@ -1,3 +1,5 @@
+import Cards from "../components/Cards"
+
 const HomePage = () => {
   return (
     <div className="page-container">
@@ -16,7 +18,7 @@ const HomePage = () => {
             <hr className="secondary"/>
         </div>
       </div>
-      hello
+      <Cards/>
     </div>
   )
 }
