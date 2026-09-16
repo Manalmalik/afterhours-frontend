@@ -1,6 +1,11 @@
 import Cards from "../components/Cards"
 
 const HomePage = () => {
+  const currentDate = new Date()
+  const monthYear = currentDate.toLocaleString("en-US", {
+    month: "long",
+    year: "numeric"
+  })
   return (
     <div className="page-container">
       <div className="page-header">
@@ -17,8 +22,15 @@ const HomePage = () => {
             </div>
             <hr className="secondary"/>
         </div>
+        <p className="caption"> Curated experiences for people who want more than just going out.</p>
       </div>
-      <Cards/>
+      <section className="section-container">
+        <div className="section-dated-header">
+          <p className="dated-header-title"> Upcoming Events </p>
+          <p className="dated-header-date"> {monthYear} </p>
+        </div>
+          <Cards/>
+      </section>
     </div>
   )
 }

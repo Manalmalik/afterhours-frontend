@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/auth.context'
+import authService from '../services/index.services'
 
 function AuthForm() {
     const {setIsLoggedIn, setLoggedUserId, setUserRole } = useContext(AuthContext)
@@ -40,12 +41,12 @@ function AuthForm() {
 
         try {
 
-            await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/auth/signup`, body)
+            await authService.post("/auth/signup", body)
             navigate("/login")
 
         }catch(error) {
 
-            if(error.response.status === 400) {
+            if(error.response?.status === 400) {
                 setErrorMessage(error.response.data.errorMessage)
             }else {
                 console.log("error")
@@ -60,7 +61,7 @@ function AuthForm() {
         }
 
         try{
-            const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/auth/login`, body)
+            const response = await authService.post("/auth/login", body)
             localStorage.setItem("authToken", response.data.authToken )
 
             //update auth states
@@ -69,7 +70,7 @@ function AuthForm() {
             setUserRole(response.data.payload.role)
 
             if(response.data.payload.role === "admin") {
-                navigate("/dasboard")
+                navigate("/dashboard")
             } else if (response.data.payload.role === "user") {
                 navigate("/account")
             }else {

@@ -6,6 +6,8 @@ import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import AccountPage from './pages/AccountPage'
+import PrivateWrapper from './components/PrivateWrapper'
+import EventDetailsPage from './pages/EventDetailsPage'
 
 function App() {
 
@@ -16,9 +18,9 @@ function App() {
         <Route path='/' element={<HomePage/>}/>
         <Route path='/signup' element={<SignUpPage/>} />
         <Route path='/login' element={<LoginPage/>} />
-        <Route path='/dashboard' element={<DashboardPage/>} />
-        <Route path='/account' element={<AccountPage/>} />
-
+        <Route path='/dashboard' element={<PrivateWrapper><DashboardPage/></PrivateWrapper>} />
+        <Route path='/account' element={<PrivateWrapper><AccountPage/></PrivateWrapper>} />
+        <Route path='/events/:id' element={<EventDetailsPage/>} />
       </Routes>
     </div>
   )
