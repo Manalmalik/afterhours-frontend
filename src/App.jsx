@@ -20,7 +20,7 @@ function App() {
         <Route path='/login' element={<LoginPage/>} />
         <Route path='/dashboard' element={<PrivateWrapper><DashboardPage/></PrivateWrapper>} />
         <Route path='/account' element={<PrivateWrapper><AccountPage/></PrivateWrapper>} />
-        <Route path='/events/:id' element={<EventDetailsPage/>} />
+        <Route path='/events/:eventId' element={<EventDetailsPage/>} />
       </Routes>
     </div>
   )

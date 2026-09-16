@@ -2,6 +2,7 @@
   /* Colors */
   --color-secondary: #FAF7F2;
   --color-primary: #A31622;
+  --color-primary-light: #A3162250;
   --color-dark: #2D1A1A;
   --color-text: #847574;
   --color-muted: #1c0f0f60;
@@ -42,7 +43,7 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3, input {
+h1, h2, h3, input, textarea {
   font-family: var(--font-heading);
 }
 
@@ -276,3 +277,87 @@ hr.primary {
 .cards-container-card {
   text-decoration: none;
 }
+
+/* FORM */
+.form-container {
+  padding: var(--space-md);
+}
+
+.form-container > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: var(--space-sm);
+}
+
+.form-container div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+}
+
+.form-container label {
+  font-family: var(--font-text);
+  font-size: var(--font-xs);
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+input, select, textarea {
+  border: 1px solid var(--color-muted);
+  min-width: 20rem;
+  background-color: var(--color-secondary);
+  border-radius: 4px;
+}
+
+input:focus,
+textarea:focus {
+  border: 1px solid var(--color-primary);
+  outline: none;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+select:hover,
+select:focus,
+select:open {
+  border: 1px solid var(--color-primary);
+}
+
+select::picker-icon {
+  color: var(--color-primary);
+  transition: 0.4s rotate;
+  font-size: var(--font-xs);
+  align-self: center;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+}
+
+::picker(select) {
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: var(--color-secondary);
+}
+
+option:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-dark);
+}
+
+option:checked {
+  font-weight: 500px;
+  background-color: var(--color-primary);
+  color:  var(--color-secondary);
+}
+
+select option::checkmark {
+    content: "";
+}
+

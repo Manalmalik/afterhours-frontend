@@ -22,8 +22,8 @@ function Cards() {
   return (
     <div className='cards-container'>
       {allEvents?.map((event) => {
-        return (<NavLink className="cards-container-card" to={`/events/${event._id}`}>
-                    <Card key={event._id} title={event.title} format={event.format}/>
+        return (<NavLink key={event._id} className="cards-container-card" to={`/events/${event._id}`}>
+                    <Card title={event.title} format={event.format}/>
           </NavLink>)
       })
       }
