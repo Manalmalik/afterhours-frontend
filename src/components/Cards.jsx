@@ -11,7 +11,7 @@ function Cards({variant}) {
       const response = await axios(`${import.meta.env.VITE_SERVER_URL}/api/events`)
       setAllEvents(response.data)
     } catch(error) {
-      console.log(erro)
+      console.log(error)
     }
   }
   

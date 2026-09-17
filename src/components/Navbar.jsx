@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
+import logo from "../assets/images/logo.png"
 
 const Navbar = () => {
   const { setIsLoggedIn, setLoggedUserId, setUserRole, isLoggedIn, userRole } = useContext(AuthContext)
@@ -38,7 +39,7 @@ const Navbar = () => {
   return (
     <div className="navbar-container">
         <NavLink to="/"> 
-          <img className="logo" src="src/assets/images/logo.png"/>
+          <img className="logo" src={logo}/>
         </NavLink>
       <div className="navbar-links">
         <NavLink to="/events"> Events </NavLink>
