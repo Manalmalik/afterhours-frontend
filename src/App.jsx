@@ -11,6 +11,7 @@ import CreateEventPage from './pages/CreateEventPage'
 import EditEventPage from './pages/EditEventPage'
 import EventsListPage from './pages/EventsListPage'
 import DashboardPage from './pages/admin/DashboardPage'
+import AddTaskPage from './pages/admin/AddTaskPage'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/events/:eventId' element={<EventDetailsPage/>} />
         <Route path='/events/create' element={<CreateEventPage/>} />
         <Route path='/events/edit/:eventId' element={<EditEventPage/>} />
+        <Route path='/tasks/:eventId' element={<AddTaskPage/>} />
       </Routes>
     </div>
   )

@@ -8,10 +8,17 @@ function EventDetailsPage() {
     const navigate = useNavigate()
     const [ eventData, setEventData ] = useState(null)
     const { userRole } =  useContext(AuthContext) 
+    const [ eventTasks, setEventTasks ] = useState([])
+    const [ taskUpdateError, setTaskUpdateError ] = useState("")
 
     const getEventData = async () => {
         const response = await authService.get(`/events/${eventId}`)
         setEventData(response.data)
+    }
+
+    const getTasksData = async() => {
+      const resposne = await authService.get(`/events/${eventId}/tasks`)
+      setEventTasks(resposne.data)
     }
 
     const handleDeleteEvent = async() => {
@@ -22,10 +29,41 @@ function EventDetailsPage() {
         console.log(error)
       }
     }
+
+    const handleTaskToggle = async (task) => {
+      const previousStatus = task.status
+      const nextStatus = previousStatus === "completed" ? "not started" : "completed"
+
+      setTaskUpdateError("")
+      setEventTasks((previousTasks) =>
+        previousTasks.map((currentTask) =>
+          currentTask._id === task._id
+            ? { ...currentTask, status: nextStatus }
+            : currentTask
+        )
+      )
+
+      try {
+        await authService.patch(`/tasks/${task._id}`, {
+          status: nextStatus
+        })
+      } catch(error) {
+        console.error("Could not update task", error)
+        setTaskUpdateError("Could not update the task. Please try again.")
+        setEventTasks((previousTasks) =>
+          previousTasks.map((currentTask) =>
+            currentTask._id === task._id
+              ? { ...currentTask, status: previousStatus }
+              : currentTask
+          )
+        )
+      }
+    }
     
     // get the event by Id. 
     useEffect(() => {
         getEventData()
+        getTasksData()
     }, [eventId])
     // Show event details
 
@@ -121,9 +159,22 @@ function EventDetailsPage() {
                   <p> progress </p>
                 </div>
                 <div  className='tasks-header-right' >
-                 <button className='btn-primary'>  Create a Task </button>
+                  <NavLink className='btn-primary' to={`/tasks/${eventData?._id}`}>  Create a Task </NavLink>
                 </div>
               </div>
+              {taskUpdateError && <p className='error-message'>{taskUpdateError}</p>}
+              <div className='event-tasks-list'>
+                {eventTasks.map((task) => {
+                  return <div className='event-task-item' key={task._id}>
+                    <input type='checkbox' id={`task-${task._id}`} checked={task.status === "completed"} onChange={() => handleTaskToggle(task)}/>
+                    <div className='event-task-content'>
+                      <label htmlFor={`task-${task._id}`}>{task.title}</label>
+                      <p>{task.description}</p>
+                    </div>
+                    <span className='event-task-status'>{task.status}</span>
+                  </div>
+                })}
+                </div>
             </section>
           }
       </div>
