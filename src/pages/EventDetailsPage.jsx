@@ -32,6 +32,7 @@ function EventDetailsPage() {
   return (
     <div>
       <h1> {eventData?.title} </h1>
+      {eventData?.imageUrl && <img src={eventData.imageUrl} />}
      { userRole === "admin" && <div className='buttons'>
         <NavLink className='btn-primary' to={`/events/edit/${eventId}`}> Edit Event </NavLink>
         <button className='btn-primary' onClick={handleDeleteEvent}> Delete Event </button>

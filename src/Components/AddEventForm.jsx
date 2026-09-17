@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { EVENT_FORMATS, EVENT_STATUSES } from "../constants/eventOptions";
 import authService from "../services/index.services";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import ImageUpload from "./ImageUpload";
 
 function AddEventForm() {
   const navigate = useNavigate();
@@ -17,6 +18,13 @@ function AddEventForm() {
       [name]: value,
     }));
   };
+
+  const handleImageUpload = (cloudinaryImageUrl) => {
+    setEvent((prevEvent) => ({
+        ...prevEvent,
+        imageUrl: cloudinaryImageUrl
+    }))
+  }
 
   const getEventDate = () => {
     const dateTime = new Date(`${event.date}T${event.time}`);
@@ -36,13 +44,14 @@ function AddEventForm() {
       status: event.status,
     }
 
+    let response
     if(eventId) {
-        const response = await authService.patch(`events/${eventId}`, body);
+        response = await authService.patch(`events/${eventId}`, body);
     } else {
-        const response = await authService.post("/events", body);
+        response = await authService.post("/events", body);
     }
     console.log(response);
-    navigate(`/events/${response.data.eventId}`);
+    navigate(`/events/${response.data._id}`);
   };
 
   const fetchExistingEvent = async () => {
@@ -180,13 +189,14 @@ function AddEventForm() {
           </div>
           <div>
             <label htmlFor="imageUrl"> Image URL </label>
-            <input
+            {/* <input
               id="imageUrl"
               type="url"
               name="imageUrl"
               value={event.imageUrl}
               onChange={handleInputChange}
-            />
+            /> */}
+            <ImageUpload handleImageUpload={handleImageUpload}/>
           </div>
           <div>
             <label htmlFor="ticketUrl"> Ticket URL </label>
