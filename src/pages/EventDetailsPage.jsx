@@ -59,6 +59,18 @@ function EventDetailsPage() {
         )
       }
     }
+
+    const getProgress = () => {
+      const totalTasks = eventTasks.length
+      const completedTasks = eventTasks.filter((task) => task.status === "completed").length
+      return `${completedTasks} of ${totalTasks} tasks completed (${Math.round(completedTasks * 100 / totalTasks)}%)`
+    }
+
+    const getProgressPercentage = () => {
+      const totalTasks = eventTasks.length
+      const completedTasks = eventTasks.filter((task) => task.status === "completed").length
+      return Math.round(completedTasks * 100 / totalTasks)
+    }
     
     // get the event by Id. 
     useEffect(() => {
@@ -156,7 +168,17 @@ function EventDetailsPage() {
                 <div  className='tasks-header-left' >
                   <p> Tasks Pending </p>
                   <h2> Event Admin Tasks </h2>
-                  <p> progress </p>
+                  <div className="task-progress">
+                  <div className="task-progress-track">
+                    <div
+                      className="task-progress-bar"
+                      style={{ width: `${getProgressPercentage()}%` }}
+                    />
+                  </div>
+
+                  {/* <span>/span> */}
+                </div>
+                  <p> {getProgress()} </p>
                 </div>
                 <div  className='tasks-header-right' >
                   <NavLink className='btn-primary' to={`/tasks/${eventData?._id}`}>  Create a Task </NavLink>
