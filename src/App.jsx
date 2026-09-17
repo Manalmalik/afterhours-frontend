@@ -4,13 +4,13 @@ import Navbar from './components/Navbar'
 import HomePage from './pages/HomePage'
 import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
-import DashboardPage from './pages/DashboardPage'
 import AccountPage from './pages/AccountPage'
 import PrivateWrapper from './components/PrivateWrapper'
 import EventDetailsPage from './pages/EventDetailsPage'
 import CreateEventPage from './pages/CreateEventPage'
 import EditEventPage from './pages/EditEventPage'
 import EventsListPage from './pages/EventsListPage'
+import DashboardPage from './pages/admin/DashboardPage'
 
 function App() {
 

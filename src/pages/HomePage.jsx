@@ -20,8 +20,8 @@ const HomePage = () => {
             <h1> Hours </h1>
             <p> Club </p>
             </div>
-            <hr className="secondary"/>
         </div>
+            <hr className="secondary"/>
         <p className="caption"> Curated experiences for people who want more than just going out.</p>
       </div>
       <section className="section-container">
