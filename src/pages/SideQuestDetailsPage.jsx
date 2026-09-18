@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import authService from '../services/index.services'
 import { AuthContext } from '../context/auth.context'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 function SideQuestDetailsPage() {
   const { sideQuestId } = useParams()
@@ -79,7 +80,7 @@ function SideQuestDetailsPage() {
       }
     }
 
-  if (isLoading) return <p className="side-quest-details-message">Side quest is loading</p>
+  if (isLoading) return <LoadingSpinner label="Loading side quest" />
 
   if (errorMessage) {
     return <p className="error-message side-quest-details-message">{errorMessage}</p>

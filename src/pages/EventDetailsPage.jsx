@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import authService from '../services/index.services'
 import { AuthContext } from '../context/auth.context'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 function EventDetailsPage() {
     const { eventId } = useParams()
     const navigate = useNavigate()
     const [ eventData, setEventData ] = useState(null)
+    const [ isLoading, setIsLoading ] = useState(true)
     const { userRole } =  useContext(AuthContext) 
     const [ eventTasks, setEventTasks ] = useState([])
     const [ taskUpdateError, setTaskUpdateError ] = useState("")
@@ -74,10 +76,19 @@ function EventDetailsPage() {
     
     // get the event by Id. 
     useEffect(() => {
-        getEventData()
-        getTasksData()
+      const loadEventDetails = async () => {
+        try {
+          await Promise.all([getEventData(), getTasksData()])
+        } finally {
+          setIsLoading(false)
+        }
+      }
+
+      loadEventDetails()
     }, [eventId])
     // Show event details
+
+    if (isLoading) return <LoadingSpinner label="Loading event" />
 
     const getDate = () => {
       if (!eventData?.date) return ""

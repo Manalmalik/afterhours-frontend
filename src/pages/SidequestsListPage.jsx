@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import authService from '../services/index.services'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 function SidequestsListPage() {
   const [sideQuests, setSideQuests] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState("")
 
   useEffect(() => {
@@ -13,6 +15,8 @@ function SidequestsListPage() {
         setSideQuests(response.data)
       } catch (error) {
         setErrorMessage("Unable to load side quests. Please try again.")
+      } finally {
+        setIsLoading(false)
       }
     }
 
@@ -31,18 +35,19 @@ function SidequestsListPage() {
         <p className="caption">Small adventures, whenever you need one.</p>
       </div>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {!errorMessage && isLoading && <LoadingSpinner label="Loading side quests" />}
 
-      <section className="cards-list-container">
-        {sideQuests.map((sideQuest) => (
-          <NavLink className="card-container" key={sideQuest._id} to={`/sidequests/${sideQuest._id}`}>
-            {sideQuest.imageUrl && <img src={sideQuest.imageUrl} alt="" width="100" />}
-            <div>
-              <h3>{sideQuest.title}</h3>
-              <p>{sideQuest.description}</p>
-            </div>
-          </NavLink>
-        ))}
-      </section>
+      {!isLoading && <section className="cards-list-container">
+          {sideQuests.map((sideQuest) => (
+            <NavLink className="card-container" key={sideQuest._id} to={`/sidequests/${sideQuest._id}`}>
+              {sideQuest.imageUrl && <img src={sideQuest.imageUrl} alt="" width="100" />}
+              <div>
+                <h3>{sideQuest.title}</h3>
+                <p>{sideQuest.description}</p>
+              </div>
+            </NavLink>
+          ))}
+        </section>}
     </div>
   )
 }

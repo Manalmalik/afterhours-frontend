@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import authService from '../services/index.services'
 import { EVENT_FORMATS, EVENT_STATUSES } from '../constants/eventOptions'
 import { AuthContext } from '../context/auth.context'
+import LoadingSpinner from './LoadingSpinner'
 
 function Cards({variant}) {
   const [ allEvents, setAllEvents ] = useState(null)
@@ -73,6 +74,7 @@ function Cards({variant}) {
       )}
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {!errorMessage && allEvents === null && <LoadingSpinner label="Loading events" />}
       {variant === "list" && filteredEvents?.length === 0 && (
         <p className="event-filters-empty">No events match your filters.</p>
       )}
