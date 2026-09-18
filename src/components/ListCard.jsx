@@ -4,6 +4,8 @@ import authService from '../services/index.services'
 
 function ListCard({variant}) {
   const [ upcomingEvents, setUpcomingEvents ] = useState(null)
+  const [ sideQuests, setSideQuests ] = useState(null)
+
 
 
       const fetchUpcomingEvents = async () => {
@@ -15,8 +17,20 @@ function ListCard({variant}) {
         }
       }
 
+      const fetchSideQuests = async () => {
+        try{
+          const response = await authService.get("/sidequests")
+          setSideQuests(response.data)
+        } catch(error) {
+          console.log(error)
+        }
+      }
+
         useEffect(() => {
           fetchUpcomingEvents()
+          if(variant === "sidequests"){
+            fetchSideQuests()
+          } 
         }, [])
       
         console.log(variant)
@@ -42,6 +56,20 @@ function ListCard({variant}) {
               <p className="caption"> {event.format}</p>
             </div>
             <NavLink to={`/events/${event._id}`}> Manage Event </NavLink>
+          </div>
+        })}
+         {variant === "sidequests" && sideQuests?.map((sideQuest, index) => {
+          return <div  className="list-container-items" key={index}>
+            <div className="list-container-date-item">
+              <h1> 15 </h1>
+              <p className="item-text"> sep </p>
+            </div>
+            <div className="list-container-item">
+              <span className='badge'> {sideQuest.status} </span>
+              <p className="item-text"> {sideQuest.title} </p>
+              <p className="caption"> {sideQuest.format}</p>
+            </div>
+            <NavLink to={`/sidequests/${sideQuest._id}`}> Manage Side Quest </NavLink>
           </div>
         })}
       </div>

@@ -61,12 +61,7 @@ function DashboardPage() {
             <InfoCard title="10" caption="open event tasks" info="tasks needing completion" variant={true} />
           </div>
           <div className="dashboard-bottom-section">
-            <div className="events-container-info">
-              <div className="events-container-header"> 
-                <p> Active Side Quests </p>
-                <NavLink to='/events'> See all Side Quests</NavLink>
-              </div>
-            </div>
+            <ListCard variant="sidequests"/>
             <ListCard variant="events"/>
 
           </div>

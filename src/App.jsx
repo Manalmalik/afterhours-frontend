@@ -12,6 +12,9 @@ import EditEventPage from './pages/EditEventPage'
 import EventsListPage from './pages/EventsListPage'
 import DashboardPage from './pages/admin/DashboardPage'
 import AddTaskPage from './pages/admin/AddTaskPage'
+import SidequestsListPage from './pages/SidequestsListPage'
+import AddSideQuestPage from './pages/AddSideQuestPage'
+import SideQuestDetailsPage from './pages/SideQuestDetailsPage'
 
 function App() {
 
@@ -29,6 +32,10 @@ function App() {
         <Route path='/events/create' element={<CreateEventPage/>} />
         <Route path='/events/edit/:eventId' element={<EditEventPage/>} />
         <Route path='/tasks/:eventId' element={<AddTaskPage/>} />
+        <Route path='/sidequests' element={<SidequestsListPage/>} />
+        <Route path='/sidequests/create' element={<AddSideQuestPage/>} />
+        <Route path='/sidequests/edit/:sideQuestId' element={<AddSideQuestPage/>} />
+        <Route path='/sidequests/:sideQuestId' element={<SideQuestDetailsPage/>} />
       </Routes>
     </div>
   )
