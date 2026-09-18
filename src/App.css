@@ -180,6 +180,7 @@ a {
   font-family: var(--font-text);
   font-size: var(--font-xxs);
   letter-spacing: var(--space-xxs);
+  width: 100%;
 }
 
 .dashboard-container {
@@ -1017,6 +1018,152 @@ select option::checkmark {
   height: 100%;
   background-color: var(--color-primary);
   transition: width 200ms ease;
+}
+
+/* ACCOUNT PAGE */
+.account-page {
+  width: 100%;
+}
+
+.account-page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-xl) var(--space-md) var(--space-lg);
+  text-align: center;
+}
+
+.account-page-header h1 {
+  color: var(--color-primary);
+  font-size: var(--font-lg);
+  line-height: 0.9;
+}
+
+.account-page-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0 var(--space-md) var(--space-lg);
+}
+
+.account-profile-card,
+.account-summary,
+.account-quests-section {
+  border-top: 1px solid var(--color-primary-light);
+  padding: var(--space-md) 0;
+}
+
+.account-profile-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.account-profile-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 5rem;
+  height: 5rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: var(--font-md);
+}
+
+.account-profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+}
+
+.account-profile-info h2,
+.account-summary h2,
+.account-section-header h2 {
+  color: var(--color-primary);
+  font-size: var(--font-md);
+}
+
+.account-profile-info > p:not(.subtitle) {
+  color: var(--color-text);
+}
+
+.account-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.account-summary > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xxs);
+  padding-left: var(--space-sm);
+  border-left: 2px solid var(--color-primary);
+}
+
+.account-summary-label {
+  font-family: var(--font-text);
+  font-size: var(--font-xs);
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+.account-summary > div > p:last-child,
+.account-empty-state {
+  color: var(--color-text);
+}
+
+.account-section-header {
+  padding-bottom: var(--space-md);
+}
+
+.account-quests-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.account-quest-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  border-left: 2px solid var(--color-primary);
+  border-top: 1px solid var(--color-primary-light);
+  border-bottom: 1px solid var(--color-primary-light);
+  background-color: var(--color-secondary-light);
+}
+
+.account-quest-item > span {
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: var(--font-md);
+}
+
+.account-quest-item > p {
+  color: var(--color-dark);
+}
+
+.account-page-message {
+  padding: var(--space-lg);
+  color: var(--color-text);
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .account-page-header h1 {
+    font-size: var(--font-md);
+  }
+
+  .account-summary {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* SIDE QUEST DETAILS */
