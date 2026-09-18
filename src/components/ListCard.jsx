@@ -39,8 +39,18 @@ function ListCard({variant}) {
   <div className="list-card-container">
       <div className="list-container-info">
       <div className="list-container-header"> 
-        <p> Upcoming events </p>
-        <NavLink to='/events'> See all events</NavLink>
+        {variant === "events" && 
+        <>
+          <p> Upcoming events </p>
+          <NavLink to='/events'> See all events</NavLink>
+        </>
+        } 
+        {variant === "sidequests" && 
+        <>
+          <p> Upcoming sid quests </p>
+          <NavLink to='/events'> See all side quests</NavLink>
+        </>
+        } 
       </div>
       <hr className='default'/>
       <div className='list-card-list'>
