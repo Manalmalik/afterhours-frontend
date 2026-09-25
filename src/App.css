@@ -439,6 +439,10 @@ hr.primary {
   padding-top: var(--space-lg);
 }
 
+.cards-navlink {
+  align-self: flex-end;
+}
+
 .loading-state {
   display: flex;
   justify-content: center;
@@ -469,6 +473,9 @@ hr.primary {
 
 .events-browser {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
 .event-filters {

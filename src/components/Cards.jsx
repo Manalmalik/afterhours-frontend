@@ -22,6 +22,15 @@ function Cards({variant}) {
       setErrorMessage("Unable to load events. Please try again.")
     }
   }
+
+  const getUpcomingEvents = () => {
+    const upcomingEvents =  allEvents?.filter((event) => {
+      const month = new Date(event.date).getMonth()
+      const currentMonth = new Date().getMonth()
+      if(currentMonth === month) return event
+    })
+    return upcomingEvents?.length > 3 ? upcomingEvents.slice(0,3) : upcomingEvents
+  }
   
   useEffect(() => {
     getAllEvents()
@@ -79,13 +88,18 @@ function Cards({variant}) {
         <p className="event-filters-empty">No events match your filters.</p>
       )}
       <div className={variant === "list" ? 'cards-list-container' : 'cards-container' }>
-      {filteredEvents?.map((event) => {
+      {variant === 'list' ? filteredEvents?.map((event) => {
         return (<NavLink key={event._id} className="cards-container-card" to={`/events/${event._id}`}>
+                    <Card title={event.title} format={event.format}/>
+          </NavLink>)
+      }) : getUpcomingEvents()?.map((event) => {
+         return (<NavLink key={event._id} className="cards-container-card" to={`/events/${event._id}`}>
                     <Card title={event.title} format={event.format}/>
           </NavLink>)
       })
       }
       </div>
+      {variant !== "list" && <NavLink to="/events" className="btn-primary cards-navlink"> See All Events </NavLink>}
     </div>
   )
 }

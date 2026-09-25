@@ -13,6 +13,7 @@ function SideQuestDetailsPage() {
   const [errorMessage, setErrorMessage] = useState("")
   const [taskUpdateError, setTaskUpdateError] = useState("")
   const navigate = useNavigate()
+  const { isLoggedIn } = useContext(AuthContext)
 
   useEffect(() => {
     const loadSideQuest = async () => {
@@ -142,6 +143,7 @@ function SideQuestDetailsPage() {
           </div>
 
           {taskUpdateError && <p className="error-message">{taskUpdateError}</p>}
+         
           <div className="event-tasks-list">
             {tasks.length === 0 && <p className="side-quest-details-empty">No tasks have been added yet.</p>}
             {tasks.map((task) => (
